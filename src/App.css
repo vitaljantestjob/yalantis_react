@@ -6,7 +6,9 @@
 
 .main .left {
   width: 65%;
+  height: 90vh;
   overflow-x: scroll;
+  overflow-y: scroll;
   border: 1px solid gray;
   margin-right: 5px;
   padding: 5px;
@@ -24,8 +26,7 @@
   width: 150px;
   border: 1px solid gray;
   margin-right: 2px;
-  position: relative;
-  top: 0;
+  border-radius: 5px;
 }
 
 .main .left .scroll .letter .title {
@@ -33,6 +34,10 @@
   text-align: center;
   font-weight: bold;
   padding: 5px 0;
+  margin-bottom: 10px;
+  background: -webkit-gradient(linear, left top, right top, from(#fff), color-stop(50%, #5a5a5a), to(#fff));
+  background: linear-gradient(to right, #fff, #5a5a5a 50%, #fff 100%);
+  color: white;
 }
 
 .main .left .scroll .letter ul {
@@ -45,6 +50,7 @@
   padding-left: 5px;
   margin: 0;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .main .left .scroll .letter .name label {

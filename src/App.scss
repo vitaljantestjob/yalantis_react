@@ -4,7 +4,9 @@ $letter_width : 150px;
     display: flex;
     .left {
         width: 65%;
+        height: 90vh;
         overflow-x: scroll;
+        overflow-y: scroll;
         border: 1px solid gray;
         margin-right: 5px;
         padding: 5px;
@@ -16,13 +18,15 @@ $letter_width : 150px;
                 width: $letter_width;
                 border: 1px solid gray;
                 margin-right: 2px;
-                position: relative;
-                top: 0;
+                border-radius: 5px;
                 .title {
                     width: 100%;
                     text-align: center;
                     font-weight: bold;
                     padding: 5px 0;
+                    margin-bottom: 10px;
+                    background: linear-gradient(to right, #fff, rgb(90, 90, 90) 50%, #fff 100%);
+                    color: white;
                 }
                 ul {
                     margin: 0;
@@ -33,6 +37,7 @@ $letter_width : 150px;
                     padding-left: 5px;
                     margin: 0;
                     margin-bottom: 10px;
+                    font-weight: bold;
                     label {
                         display: block;
                         font-size: 0.8em;

@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 // let persons = [];
@@ -14,11 +14,10 @@ class Main extends React.Component {
         axios.get(`https://yalantis-react-school-api.yalantis.com/api/task0/users`)
             .then(res => {
                 Object.values(res.data).forEach((i) => {
+                    i.status = false;
                     this.persons.push(i);
                 });
                 this.persons.sort((a, b) => a.lastName > b.lastName ? 1 : a.lastName < b.lastName ? -1 : 0)
-                this.persons.forEach((i) => {
-                })
                 this.setState({ persons: this.persons });
             })
     }
@@ -33,23 +32,34 @@ class Main extends React.Component {
 }
 
 const Radio = (props) => {
-    let text = props.type === 'active' ? 'active' : 'not active';
-    let checked = '';
-    if ( (props.type === 'active' && props.status === 'active') || (props.type != 'active' && props.status != 'active') ) checked = 'checked';
+    // const [status, setStatus] = useState(props.status);
     return (
-        <label><input type="radio" checked={checked}/> {text} </label>    )
+        <div>
+            <label><input type="radio" checked={props.status ? 'checked' : ''} onChange={()=>props.setStatus(true)}/> active </label>
+
+            <label><input type="radio" checked={!props.status ? 'checked' : ''} onChange={()=>props.setStatus(false)}/> not active </label>
+        </div>
+    )
+}
+
+const Name = (props) => {
+    const [status, setStatus] = useState(props.status);
+    let color = status ? {color: 'blue'} : {color: 'black'};
+    return (
+        <li className="name" style={color}>
+            {props.lastName} {props.firstName}
+            <Radio status={status} setStatus={setStatus}/>
+        </li>
+    )
 }
 
 const Letter = (props) => {
     let names = [];
     props.persons.forEach((i, n) => {
         names.push(
-            <li className="name" key={n.toString()}>
-                {i.lastName} {i.firstName}
-                <Radio type='active' status=''/>
-                <Radio type='' status=''/>
-            </li>)
-    });
+            <Name firstName={i.firstName} lastName={i.lastName} key={n.toString()}/>
+        )
+    })
     if (names.length === 0) names.push(<li className="name center" key='0'>-------</li>)
     return (
         <div className="letter">
