@@ -1,4 +1,4 @@
-$letter_width : 100px;
+$letter_width : 150px;
 
 .main {
     display: flex;
@@ -10,16 +10,37 @@ $letter_width : 100px;
         padding: 5px;
         .scroll {
             width: ($letter_width + 5) * 26;
+            display: flex;
             .letter {
                 display: inline-block;
                 width: $letter_width;
                 border: 1px solid gray;
                 margin-right: 2px;
+                position: relative;
+                top: 0;
                 .title {
                     width: 100%;
                     text-align: center;
                     font-weight: bold;
-                    padding: 5px;
+                    padding: 5px 0;
+                }
+                ul {
+                    margin: 0;
+                    padding: 0;
+                }
+                .name {
+                    list-style-type: none;
+                    padding-left: 5px;
+                    margin: 0;
+                    margin-bottom: 10px;
+                    label {
+                        display: block;
+                        font-size: 0.8em;
+                        cursor: pointer;
+                    }
+                }
+                .center {
+                    text-align: center;
                 }
             }
 
