@@ -1,10 +1,11 @@
 $letter_width : 150px;
+$letter_height: 90vh;
 
 .main {
     display: flex;
+    height: $letter_height;
     .left {
         width: 65%;
-        height: 90vh;
         overflow-x: scroll;
         overflow-y: scroll;
         border: 1px solid gray;
@@ -25,7 +26,7 @@ $letter_width : 150px;
                     font-weight: bold;
                     padding: 5px 0;
                     margin-bottom: 10px;
-                    background: linear-gradient(to right, #fff, rgb(90, 90, 90) 50%, #fff 100%);
+                    background: linear-gradient(to right, #fff, rgb(27, 23, 83) 50%, #fff 100%);
                     color: white;
                 }
                 ul {
@@ -54,6 +55,20 @@ $letter_width : 150px;
     .right {
         border: 1px solid gray;
         width: 30%;
-        overflow: hidden;
+        overflow: scroll;
+        .title {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .item {
+            padding-left: 15px;
+            margin-bottom: 10px;
+        }
+        .month {
+            font-weight: bold;
+            padding: 10px;
+        }
     }
 }

@@ -2,11 +2,11 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 90vh;
 }
 
 .main .left {
   width: 65%;
-  height: 90vh;
   overflow-x: scroll;
   overflow-y: scroll;
   border: 1px solid gray;
@@ -35,8 +35,8 @@
   font-weight: bold;
   padding: 5px 0;
   margin-bottom: 10px;
-  background: -webkit-gradient(linear, left top, right top, from(#fff), color-stop(50%, #5a5a5a), to(#fff));
-  background: linear-gradient(to right, #fff, #5a5a5a 50%, #fff 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#fff), color-stop(50%, #1b1753), to(#fff));
+  background: linear-gradient(to right, #fff, #1b1753 50%, #fff 100%);
   color: white;
 }
 
@@ -66,6 +66,23 @@
 .main .right {
   border: 1px solid gray;
   width: 30%;
-  overflow: hidden;
+  overflow: scroll;
+}
+
+.main .right .title {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.main .right .item {
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+
+.main .right .month {
+  font-weight: bold;
+  padding: 10px;
 }
 /*# sourceMappingURL=App.css.map */
