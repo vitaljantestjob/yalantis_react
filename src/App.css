@@ -71,9 +71,13 @@
 
 .main .right .title {
   text-align: center;
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: 5px;
   margin-bottom: 10px;
+  font-weight: bold;
+  padding: 5px 0;
+  background: -webkit-gradient(linear, left top, right top, from(#fff), color-stop(50%, #1b1753), to(#fff));
+  background: linear-gradient(to right, #fff, #1b1753 50%, #fff 100%);
+  color: white;
 }
 
 .main .right .item {

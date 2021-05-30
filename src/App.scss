@@ -58,9 +58,12 @@ $letter_height: 90vh;
         overflow: scroll;
         .title {
             text-align: center;
-            margin-top: 10px;
-            font-weight: bold;
+            margin-top: 5px;
             margin-bottom: 10px;
+            font-weight: bold;
+            padding: 5px 0;
+            background: linear-gradient(to right, #fff, rgb(27, 23, 83) 50%, #fff 100%);
+            color: white;
         }
         .item {
             padding-left: 15px;

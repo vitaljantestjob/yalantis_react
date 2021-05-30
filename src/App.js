@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const monthList = ['', 'January', 'Fabruary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-class Main extends React.Component {
+class Main extends React.Component { // main component
     constructor() {
         super();
         this.persons = [];
@@ -17,7 +17,7 @@ class Main extends React.Component {
                     this.persons.push(i);
                 });
                 this.persons.sort((a, b) => a.lastName > b.lastName ? 1 : a.lastName < b.lastName ? -1 : 0)
-                this.forceUpdate();
+                this.forceUpdate(); // page onload rendering components
             })
     }
     render() {
@@ -27,8 +27,8 @@ class Main extends React.Component {
     }
 }
 
-const changeStatus = (setStatus, value, id, list, setList) => {
-    setStatus(value);
+const changeStatus = (setStatus, value, id, list, setList) => { // radiobutton click handler
+    setStatus(value); // apply & render changes in person active status
     if (value) { localStorage.setItem(id, true) } else localStorage.removeItem(id);
     let newList = list.map((i) => {
         if (i.id === id) {
@@ -36,10 +36,10 @@ const changeStatus = (setStatus, value, id, list, setList) => {
         }
         return i;
     });
-    setList(newList);
+    setList(newList); // apply & render changes in birthday list
 }
 
-const Radio = (props) => {
+const Radio = (props) => { // radiobuttons component
     return (
         <div>
             <label>
@@ -63,7 +63,7 @@ const Radio = (props) => {
     )
 }
 
-const Name = (props) => {
+const Name = (props) => { // persons item radiobuttons component
     const [status, setStatus] = useState(props.status);
     let color = status ? { color: 'blue' } : { color: 'black' };
     return (
@@ -80,7 +80,7 @@ const Name = (props) => {
     )
 }
 
-const Letter = (props) => {
+const Letter = (props) => { // letter relationed persons list component
     let names = [];
     props.persons.forEach((i, n) => {
         names.push(
@@ -91,10 +91,11 @@ const Letter = (props) => {
                 id={i.id}
                 setList={props.setList}
                 list={props.list}
+                key={'name'+n}
             />
         )
     })
-    if (names.length === 0) names.push(<li className="name center">-------</li>)
+    if (names.length === 0) names.push(<li className="name center">-------</li>); // if not persons, whoes last name beginning from current letter
     return (
         <div className="letter">
             <div className="title">
@@ -109,7 +110,7 @@ const Letter = (props) => {
 
 const Left = (props) => { // left panel parent component
     let letters = [];
-    for (let n = 65; n <= 90; n++) {
+    for (let n = 65; n <= 90; n++) { // letters array loop
         let filteredPersons = props.list.filter((i) => {
             return (i.lastName.charAt(0).toUpperCase() === String.fromCharCode(n));
         });
@@ -132,7 +133,7 @@ const Left = (props) => { // left panel parent component
     )
 }
 
-const getMonth = (date)=>{
+const getMonth = (date)=>{ // parse month value from JSON date string
     return +date.substring(5, 7);
 }
 
@@ -143,11 +144,7 @@ const monthOrder = (date) => { // returns month order relatively current month
     return order;
 }
 
-// const dobOrder = (date)=>{ // returns order index to sort by birthday without year
-//     return date.substring(5, 7) + date.substring(8, 10);
-// }
-
-const dateParse = (date) => { // returns the birthday string
+const dateParse = (date) => { // returns the birthday string from JSON date string
     const day = date.substring(8, 10);
     const month = +date.substring(5, 7);
     const year = date.substring(0, 5);
@@ -161,7 +158,6 @@ const RightElem = (props) => { // username & birthday component
 }
 
 const RightMonth = (props) => { // rightpanel month title component
-    console.log(monthList[+props.date])
     return (
         <div className="month">{monthList[props.date]}</div>
     );
@@ -171,19 +167,16 @@ const Right = (props) => { // right panel parent component
     const filteredList = props.list.filter ((i)=>{
         return i.status;
     })
-    let names = [];
+    let items = [];
     let titleText = 'Employees birthday';
-    let monthList = [];
-    // filteredList.sort((a, b)=> dobOrder(a.dob) > dobOrder(b.dob) ? 1 : dobOrder(a.dob) < dobOrder(b.dob) ? -1 : 0);
-    // filteredList.sort((a, b)=> a.lastName > b.lastName ? 1 : a.lastName < b.lastName ? -1 : 0);
     filteredList.sort((a, b)=> monthOrder(a.dob) > monthOrder(b.dob) ? 1 : monthOrder(a.dob) < monthOrder(b.dob) ? -1 : 0);
     let counter;
     filteredList.forEach((i, n) => {
         if (counter !== getMonth(i.dob)) {
-            names.push(<RightMonth date={getMonth(i.dob)}/>);
+            items.push(<RightMonth date={getMonth(i.dob)} key={'month'+counter}/>);
             counter = getMonth(i.dob);
         }
-        names.push(
+        items.push(
             <RightElem
                 lastName={i.lastName}
                 firstName={i.firstName}
@@ -192,21 +185,11 @@ const Right = (props) => { // right panel parent component
             />
         );
     });
-    // filteredList.forEach((i, n) => {
-    //     names.push(
-    //         <RightElem
-    //             lastName={i.lastName}
-    //             firstName={i.firstName}
-    //             dob={i.dob}
-    //             key={n}
-    //         />
-    //     );
-    // });
-    if (names.length === 0) titleText = 'Employees List is empty';
+    if (items.length === 0) titleText = 'Employees List is empty';
     return (
         <div className="right">
             <div className="title">{titleText}</div>
-            {names}
+            {items}
         </div>
     )
 }
