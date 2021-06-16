@@ -10,7 +10,7 @@ class Main extends React.Component { // main component
         this.persons = [];
     }
     componentDidMount() {
-        axios.get(`https://yalantis-react-school-api.yalantis.com/api/task0/users`)
+        axios.get(`./json/source.json`)
             .then(res => {
                 Object.values(res.data).forEach((i) => {
                     i.status = localStorage.getItem(i.id) ? true : false;
@@ -91,7 +91,7 @@ const Letter = (props) => { // letter relationed persons list component
                 id={i.id}
                 setList={props.setList}
                 list={props.list}
-                key={'name'+n}
+                key={i.firstName+n}
             />
         )
     })
